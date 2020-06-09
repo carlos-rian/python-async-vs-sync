@@ -47,4 +47,4 @@ def main():
 if __name__ == "__main__":
     init = time()
     main()
-    print(f"Finalizado em {time()-init:.2f}")
+    print(f"Finalizado em {time()-init:.2f} seg")
