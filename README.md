@@ -15,3 +15,6 @@ python project/async.py
 or
 python project/sync.py
 ```
+
+## Adendo
+Caso use a viacep, altere o import do serializador para CepSerial apenas. url: http://viacep.com.br/ws/01001000/json/unicode/

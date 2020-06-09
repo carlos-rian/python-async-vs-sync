@@ -4,10 +4,11 @@ from sqlalchemy.ext.declarative import declarative_base
 from marshmallow_sqlalchemy import SQLAlchemySchema, auto_field
 
 
-url = "sqlite:///default/db.db"
-engine = create_engine(url)
+uri = "sqlite:///default/db.db"
+engine = create_engine(uri)
 Session = sessionmaker(bind=engine)
 Base = declarative_base()
+
 
 class CepModel(Base):
     __tablename__ = "ceps"
@@ -22,15 +23,14 @@ class CepModel(Base):
     complemento = Column(String(255), nullable=True)
 
     def __repr__(self):
-        return '<Example model {}>'.format(self.cep)
-    
+        return "<Example model {}>".format(self.cep)
 
 
 class CepSerial(SQLAlchemySchema):
     class Meta:
         model = CepModel
         load_instance = True
-    
+
     uf = auto_field()
     cep = auto_field()
     gia = auto_field()
@@ -42,8 +42,6 @@ class CepSerial(SQLAlchemySchema):
     complemento = auto_field()
 
 
-
-
 class CepModel2(Base):
     __tablename__ = "enderecos"
     uf = Column(String(255), nullable=True)
@@ -52,20 +50,20 @@ class CepModel2(Base):
     cidade = Column(String(255), nullable=True)
     logradouro = Column(String(255), nullable=True)
 
-
     def __repr__(self):
-        return '<Example model {}>'.format(self.cep)
+        return "<Example model {}>".format(self.cep)
+
 
 class CepSerial2(SQLAlchemySchema):
     class Meta:
         model = CepModel2
         load_instance = True
-    
+
     uf = auto_field()
     cep = auto_field()
     bairro = auto_field()
     cidade = auto_field()
     logradouro = auto_field()
-        
+
 
 Base.metadata.create_all(engine)

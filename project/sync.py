@@ -5,9 +5,9 @@ from time import time
 
 session = Session()
 
+
 def get_cep(cep: str = None) -> dict:
-    # caso use a viacep, altere o campo import dp banco para CepSerial apenas.
-    url = f"http://cep.la/{cep}" # or http://viacep.com.br/ws/01001000/json/unicode/
+    url = f"http://cep.la/{cep}"
     headers = {"Accept": "application/json"}
     result: dict = requests.api.get(url=url, headers=headers)
     try:
@@ -16,6 +16,7 @@ def get_cep(cep: str = None) -> dict:
         result = {"erro": True}
     return result
 
+
 def save_result(result: dict) -> bool:
     ms = CepSerial2()
     try:
@@ -23,9 +24,10 @@ def save_result(result: dict) -> bool:
         session.add(cep)
         session.commit()
         return True
-    except Exception as e:
+    except Exception:
         session.rollback()
         return False
+
 
 def main():
     ceps = get_file()
@@ -33,12 +35,16 @@ def main():
         result = get_cep(cep=cep)
         if "erro" not in result:
             insert = save_result(result=result)
-            print(f"Inserido com sucesso: {i} - cep: {cep}" if insert else f"Erro ao inserir: {i} - cep: {cep}")
+            print(
+                f"Inserido com sucesso: {i} - cep: {cep}"
+                if insert
+                else f"Erro ao inserir: {i} - cep: {cep}"
+            )
         else:
             print(f"Erro ao buscar CEP: {i} - cep: {cep}")
+
 
 if __name__ == "__main__":
     init = time()
     main()
     print(f"Finalizado em {time()-init:.2f}")
-
