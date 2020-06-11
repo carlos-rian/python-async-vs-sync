@@ -11,6 +11,8 @@ pip install -r requirements
 
 ## Executar
 ```
+python main.py
+or 
 python project/async.py
 or
 python project/sync.py

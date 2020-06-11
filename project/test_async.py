@@ -1,11 +1,11 @@
 import asyncio
 from default.readfile import get_file
-from default.db import CepModel, CepSerial2, Session
+from default.db import CepSerial, Session
 from time import time
 from aiohttp import ClientSession
 
 Session = Session()
-ms = CepSerial2()
+ms = CepSerial()
 
 
 def save_result(result: dict) -> bool:
@@ -25,7 +25,7 @@ async def fetch(session: ClientSession, url: str) -> dict:
         return await response.json()
 
 
-async def get_cep(cep: int = "05571110", number: int = 0) -> None:
+async def get_cep(cep: int = None, number: int = 0) -> None:
     url = f"http://cep.la/{cep}"
     async with ClientSession() as client:
         result = await fetch(session=client, url=url)
@@ -42,7 +42,7 @@ async def get_cep(cep: int = "05571110", number: int = 0) -> None:
         )
 
 
-async def main():
+async def execute() -> None:
     ceps = get_file()
     lista = list()
     for i, cep in enumerate(ceps):
@@ -51,8 +51,8 @@ async def main():
     await asyncio.wait(lista)
 
 
-init = time()
-loop = asyncio.get_event_loop()
-loop.run_until_complete(main())
-loop.close()
-print(f"Finalizado em {time()-init:.2f} seg")
+def main() -> None:
+    loop = asyncio.get_event_loop()
+    loop.run_until_complete(execute())
+    loop.close()
+

@@ -1,6 +1,6 @@
 import requests
 from default.readfile import get_file
-from default.db import CepSerial2, Session
+from default.db import CepSerial, Session
 from time import time
 
 session = Session()
@@ -18,7 +18,7 @@ def get_cep(cep: str = None) -> dict:
 
 
 def save_result(result: dict) -> bool:
-    ms = CepSerial2()
+    ms = CepSerial()
     try:
         cep = ms.load(result, session=session)
         session.add(cep)
@@ -29,7 +29,7 @@ def save_result(result: dict) -> bool:
         return False
 
 
-def main():
+def main() -> None:
     ceps = get_file()
     for i, cep in enumerate(ceps):
         result = get_cep(cep=cep)
@@ -42,9 +42,4 @@ def main():
             )
         else:
             print(f"Erro ao buscar CEP: {i} - cep: {cep}")
-
-
-if __name__ == "__main__":
-    init = time()
-    main()
-    print(f"Finalizado em {time()-init:.2f} seg")
+   
