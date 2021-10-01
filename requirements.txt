@@ -1,0 +1,4 @@
+marshmallow_sqlalchemy
+sqlalchemy
+aiohttp
+requests

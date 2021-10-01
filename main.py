@@ -1,6 +1,5 @@
-
-from project import test_sync
-from project import test_async
+import test_sync
+import test_async
 from time import time
 
 init = time()
