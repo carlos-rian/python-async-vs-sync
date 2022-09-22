@@ -43,3 +43,10 @@ def main() -> None:
         else:
             print(f"Erro ao buscar CEP: {i} - cep: {cep}")
    
+
+if __name__ == "__main__":
+    init = time()
+    print(15 * "+=", "Iniciando Test Sync", 15 * "=+")    
+    main()
+    tempo_sync = time()-init
+    print(10 * "+=", f"Test Sync Finalizado em {tempo_sync:.2f} Seg", 10 * "=+")

@@ -56,3 +56,9 @@ def main() -> None:
     loop.run_until_complete(execute())
     loop.close()
 
+if __name__ == "__main__":
+    init = time()
+    print(15 * "+=", "Iniciando Test Async", 15 * "=+")
+    main()
+    tempo_async = time()-init
+    print(12 * "+=", f"Test Async Finalizado em {tempo_async:.2f} Seg", 12 * "=+")

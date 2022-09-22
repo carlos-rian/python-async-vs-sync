@@ -13,9 +13,9 @@ pip install -r requirements
 ```
 python main.py
 or 
-python project/async.py
+python test_async.py
 or
-python project/sync.py
+python test_sync.py
 ```
 
 ## Adendo
